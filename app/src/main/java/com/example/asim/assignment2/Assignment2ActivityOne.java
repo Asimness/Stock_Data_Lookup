@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -35,22 +36,29 @@ import static java.net.Proxy.Type.HTTP;
 
 public class Assignment2ActivityOne extends AppCompatActivity implements StockDataDisplayFragment.OnFragmentInteractionListener, StockPromptFragment.OnFragmentInteractionListener {
 
-    StringBuilder URLBuilder = new StringBuilder("http://utdallas.edu/~John.Cole/2017Spring/");
-    final String TAG = "ASSIGNMENT2";
+    StringBuilder URLBuilder = new StringBuilder("http://utdallas.edu/~John.Cole/2017Spring/"); // Base URL for data
+    final String TAG = "ASSIGNMENT2"; // Tag for logging
+
+    // Used for the Recycler View
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private Button DisplayButton;
-    private Button BackButton;
+
+    // Buttons on activity and message tothe user
+    private Button displayButton;
+    private Button backButton;
     private String displayMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment2_one);
-        DisplayButton = findViewById(R.id.displayButton);
-        BackButton = findViewById(R.id.backButton);
 
+        // Initialize buttons on the activity
+        displayButton = findViewById(R.id.displayButton);
+        backButton = findViewById(R.id.backButton);
+
+        // Add the prompt fragment to the activity
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         StockPromptFragment fragment = new StockPromptFragment();
@@ -58,8 +66,13 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
         fragmentTransaction.commit();
     }
 
+    /**
+     * This method is triggered when a user clicks on the display button.
+     * It passes text entered in the EditText field with the base URL to the Asynch Task
+     * inorder to retrieve the stock data.
+     * @param view
+     */
     public void onClickDisplayData(View view) {
-
         EditText editText = findViewById(R.id.inputSymbolText);
         String symbol = editText.getText().toString();
         URLBuilder.append(symbol.toUpperCase());
@@ -70,21 +83,29 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
         URLBuilder = new StringBuilder("http://utdallas.edu/~John.Cole/2017Spring/");
     }
 
+    /**
+     * This method is triggered when a user clicks on the back button.
+     * It returns the user to the prompt fragment.
+     * @param view
+     */
     public void onClickToPromptFragment(View view) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         StockPromptFragment fragment = new StockPromptFragment();
         fragmentTransaction.replace(R.id.activity_assignment_2_constraint_layout, fragment);
         fragmentTransaction.commit();
-        DisplayButton.setVisibility(View.VISIBLE);
-        BackButton.setVisibility(View.INVISIBLE);
+        displayButton.setVisibility(View.VISIBLE);
+        backButton.setVisibility(View.INVISIBLE);
     }
 
-
+    /**
+     * Async task class for retrieving the stock data.
+     */
     class GetStockDataTask extends AsyncTask<String, Integer, ArrayList<String>>{
 
         @Override
         protected ArrayList<String> doInBackground(String... urls) {
+            onProgressUpdate(1);
             ArrayList<String> data = new ArrayList();
             try {
                 URL url = new URL(urls[0]);
@@ -110,11 +131,14 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
             }catch (Exception e){
                 Log.e(TAG, e.toString());
             }
-
-
-
             data.remove(0);
             return data;
+        }
+
+
+        protected void onProgressUpdate(Integer... progress) {
+            StockPromptFragment fragment = (StockPromptFragment) getSupportFragmentManager().findFragmentById(R.id.activity_assignment_2_constraint_layout);
+            fragment.setProgressBarOn();
         }
 
         protected void onPostExecute(ArrayList<String> result) {
@@ -128,16 +152,13 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
             fragment.setArguments(bundle);
             fragmentTransaction.replace(R.id.activity_assignment_2_constraint_layout, fragment);
             fragmentTransaction.commit();
-            DisplayButton.setVisibility(View.INVISIBLE);
-            BackButton.setVisibility(View.VISIBLE);
+            displayButton.setVisibility(View.INVISIBLE);
+            backButton.setVisibility(View.VISIBLE);
         }
     }
-
 
     public void onFragmentInteraction(Uri uri){
 
     }
-
-
 }
 

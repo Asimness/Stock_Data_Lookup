@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class StockDataDisplayFragment extends Fragment  {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ProgressBar progressBar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -140,6 +142,4 @@ public class StockDataDisplayFragment extends Fragment  {
         mAdapter = new MyAdapter(dataset);
         recyclerView.setAdapter(mAdapter);
     }
-
-
 }

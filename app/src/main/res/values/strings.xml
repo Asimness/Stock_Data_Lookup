@@ -3,6 +3,7 @@
     <string name="prompt">Enter A Stock Symbol</string>
     <string name="ticker_symbol">Ticker Symbol</string>
     <string name="display_button">Display</string>
+    <string name="back_button">Back</string>
     <string name="date">Date</string>
     <string name="open">Open</string>
     <string name="high">High</string>

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -39,14 +40,15 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    private Button DisplayButton;
+    private Button BackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment2_one);
-
-
+        DisplayButton = findViewById(R.id.displayButton);
+        BackButton = findViewById(R.id.backButton);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -63,9 +65,17 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
         URLBuilder.append(".txt");
         String url = URLBuilder.toString();
         new GetStockDataTask().execute(url);
-
-
         URLBuilder = new StringBuilder("http://utdallas.edu/~John.Cole/2017Spring/");
+    }
+
+    public void onClickToPromptFragment(View view) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        StockPromptFragment fragment = new StockPromptFragment();
+        fragmentTransaction.replace(R.id.activity_assignment_2_constraint_layout, fragment);
+        fragmentTransaction.commit();
+        DisplayButton.setVisibility(View.VISIBLE);
+        BackButton.setVisibility(View.INVISIBLE);
     }
 
 
@@ -116,6 +126,8 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
             fragment.setArguments(bundle);
             fragmentTransaction.replace(R.id.activity_assignment_2_constraint_layout, fragment);
             fragmentTransaction.commit();
+            DisplayButton.setVisibility(View.INVISIBLE);
+            BackButton.setVisibility(View.VISIBLE);
         }
     }
 

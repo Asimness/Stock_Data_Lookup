@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -83,6 +84,12 @@ public class StockDataDisplayFragment extends Fragment  {
 
         ArrayList<String> data = getArguments().getStringArrayList("data");
         updateRecyclerView(data);
+
+
+        String displayMessage = getArguments().getString("DisplayMessage");
+        TextView textView = rootView.findViewById(R.id.stockDisplayText);
+        textView.setText("Showing data for " + displayMessage);
+
         // Inflate the layout for this fragment
         return rootView;
     }

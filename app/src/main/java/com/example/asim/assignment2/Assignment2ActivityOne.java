@@ -42,6 +42,7 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
     private RecyclerView.LayoutManager layoutManager;
     private Button DisplayButton;
     private Button BackButton;
+    private String displayMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
         EditText editText = findViewById(R.id.inputSymbolText);
         String symbol = editText.getText().toString();
         URLBuilder.append(symbol.toUpperCase());
+        displayMessage = symbol.toUpperCase();
         URLBuilder.append(".txt");
         String url = URLBuilder.toString();
         new GetStockDataTask().execute(url);
@@ -119,7 +121,7 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
 
             Bundle bundle = new Bundle();
             bundle.putStringArrayList("data", result);
-
+            bundle.putString("DisplayMessage", displayMessage);
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             StockDataDisplayFragment fragment = new StockDataDisplayFragment();

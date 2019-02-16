@@ -6,9 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".StockDataDisplayFragment">
 
+    <TextView
+        android:id="@+id/stockDisplayText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text=""
+        android:textSize="@dimen/edit_text_size" />
+
+    <View style="@style/Divider"
+        app:layout_constraintBottom_toBottomOf="@+id/stockDisplayText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stockDisplayText"></View>
+
     <include
-        android:id="@+id/include"
-        layout="@layout/my_text_view"></include>
+        android:id="@+id/column_headers"
+        layout="@layout/column_headers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stockDisplayText"></include>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
@@ -20,9 +41,9 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".7"
+        app:layout_constraintHeight_percent=".6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        app:layout_constraintVertical_bias="0.188" />
+        app:layout_constraintTop_toBottomOf="@+id/column_headers"
+        app:layout_constraintVertical_bias="0.085" />
 
 </android.support.constraint.ConstraintLayout>

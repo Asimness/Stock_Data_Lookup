@@ -46,15 +46,13 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment2_one);
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        StockPromptFragment fragment = new StockPromptFragment();
+        fragmentTransaction.replace(R.id.activity_assignment_2_constraint_layout, fragment);
+        fragmentTransaction.commit();
     }
 
     public void onClickDisplayData(View view) {
@@ -103,20 +101,19 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
 
 
 
-
+            data.remove(0);
             return data;
         }
 
         protected void onPostExecute(ArrayList<String> result) {
-            String[] dataset = new String[result.size()];
-            dataset = result.toArray(dataset);
 
-            mAdapter = new MyAdapter(dataset);
-            recyclerView.setAdapter(mAdapter);
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("data", result);
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             StockDataDisplayFragment fragment = new StockDataDisplayFragment();
+            fragment.setArguments(bundle);
             fragmentTransaction.replace(R.id.activity_assignment_2_constraint_layout, fragment);
             fragmentTransaction.commit();
         }

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Assignment2</string>
+    <string name="prompt">Enter A Stock Symbol</string>
+    <string name="ticker_symbol">Ticker Symbol</string>
+    <string name="display_button">Display</string>
+    <string name="date">Date</string>
+    <string name="open">Open</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
+    <string name="close">Close</string>
+    <string name="volume">Volume</string>
+    <string name="adj_close">Adj Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

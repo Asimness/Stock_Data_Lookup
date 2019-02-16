@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="prompt_text_size">32sp</dimen>
+    <dimen name="edit_text_size">24sp</dimen>
+    <dimen name="display_button_text_size">16sp</dimen>
+    <dimen name="table_text_size">24sp</dimen>
+</resources>

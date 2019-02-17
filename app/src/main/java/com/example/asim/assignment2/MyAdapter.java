@@ -14,7 +14,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each data item is just a TextView in this case
         public TextView dateTextView;
         public TextView openTextView;
         public TextView highTextView;

@@ -90,7 +90,12 @@ public class StockDataDisplayFragment extends Fragment  {
 
         String displayMessage = getArguments().getString("DisplayMessage");
         TextView textView = rootView.findViewById(R.id.stockDisplayText);
-        textView.setText("Showing data for " + displayMessage);
+
+        if(displayMessage.startsWith("error"))
+            textView.setText(displayMessage);
+        else
+            textView.setText("Showing data for " + displayMessage);
+
 
         // Inflate the layout for this fragment
         return rootView;

@@ -103,6 +103,13 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
      */
     class GetStockDataTask extends AsyncTask<String, Integer, ArrayList<String>>{
 
+        /**
+         * This methods opens an HttpURL connection with the URL given by the user.
+         * If the connection is a success the data from the website is read in to an InputStream
+         * and then a scanner is used to parse each line of the InputStream into an ArrayList.
+         * @param urls
+         * @return data in String ArrayList
+         */
         @Override
         protected ArrayList<String> doInBackground(String... urls) {
             onProgressUpdate(1);
@@ -113,7 +120,6 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setConnectTimeout(45000);
-                //connection.setRequestProperty("Accept", "app2");
                 connection.connect();
                 if(connection.getResponseCode() == 200){
                     InputStream responseInputStream = connection.getInputStream();
@@ -126,22 +132,36 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
                     scanner.close();
                 }else{
                     Log.i(TAG, "error "  + connection.getResponseCode());
+                    displayMessage = "error "  + connection.getResponseCode();
                 }
 
             }catch (Exception e){
                 Log.e(TAG, e.toString());
+                displayMessage = "error "  + e.toString();
             }
-            data.remove(0);
+
             return data;
         }
 
-
+        /**
+         * This method makes the progress spinner visible indicating work.
+         * @param progress
+         */
         protected void onProgressUpdate(Integer... progress) {
             StockPromptFragment fragment = (StockPromptFragment) getSupportFragmentManager().findFragmentById(R.id.activity_assignment_2_constraint_layout);
             fragment.setProgressBarOn();
         }
 
+        /**
+         * This method takes a String ArrayList with the stock data and adds it to a Bundle.
+         * This bundle is then passed to the display fragment and the display fragment transaction occurs
+         * launching the display fragment. Then the display buttons becomes invisible and the back button
+         * becomes visible.
+         * @param result
+         */
         protected void onPostExecute(ArrayList<String> result) {
+            if(result.size() > 0)
+                result.remove(0);
 
             Bundle bundle = new Bundle();
             bundle.putStringArrayList("data", result);
@@ -157,6 +177,11 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
         }
     }
 
+
+    /**
+     * Need to implement the OnFragmentInteractionListener
+     * @param uri
+     */
     public void onFragmentInteraction(Uri uri){
 
     }

@@ -5,6 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+/**
+ * Asim Anis
+ * Assignment 2 CS4301.002
+ * Professor John Cole
+ * 2/19/2019
+ * This program takes in a ticker symbol from the user and retrieves the stock data for this symbol
+ * from a website and reads in this information to display it to the user. The processing of the data is done on
+ * a asynchronously. There are 2 fragments one to display the prompt for the user and the other to display
+ * the stock data. The user can switch between these fragments using the Display and Back Buttons.
+ */
+
+// Adapter for the RecyclerView
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 

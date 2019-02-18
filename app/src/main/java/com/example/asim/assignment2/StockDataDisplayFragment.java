@@ -13,7 +13,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+/**
+ * Asim Anis
+ * Assignment 2 CS4301.002
+ * Professor John Cole
+ * 2/19/2019
+ * This program takes in a ticker symbol from the user and retrieves the stock data for this symbol
+ * from a website and reads in this information to display it to the user. The processing of the data is done on
+ * a asynchronously. There are 2 fragments one to display the prompt for the user and the other to display
+ * the stock data. The user can switch between these fragments using the Display and Back Buttons.
+ */
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,16 +35,10 @@ import java.util.ArrayList;
 public class StockDataDisplayFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ProgressBar progressBar;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -47,16 +50,12 @@ public class StockDataDisplayFragment extends Fragment  {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment StockDataDisplayFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static StockDataDisplayFragment newInstance(String param1, String param2) {
         StockDataDisplayFragment fragment = new StockDataDisplayFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,14 +63,12 @@ public class StockDataDisplayFragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_stock_data_display, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
@@ -84,6 +81,7 @@ public class StockDataDisplayFragment extends Fragment  {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
+        // get data from the arguments bundle
         ArrayList<String> data = getArguments().getStringArrayList("data");
         updateRecyclerView(data);
 
@@ -96,8 +94,6 @@ public class StockDataDisplayFragment extends Fragment  {
         else
             textView.setText("Showing data for " + displayMessage);
 
-
-        // Inflate the layout for this fragment
         return rootView;
     }
 

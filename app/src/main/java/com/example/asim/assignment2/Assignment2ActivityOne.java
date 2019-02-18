@@ -144,6 +144,7 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
                 }else{
                     Log.i(TAG, "error "  + connection.getResponseCode());
                     displayMessage = "error "  + connection.getResponseCode();
+                    connection.disconnect();
                 }
 
             }catch (Exception e){

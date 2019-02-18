@@ -83,9 +83,11 @@ public class StockDataDisplayFragment extends Fragment  {
 
         // get data from the arguments bundle
         ArrayList<String> data = getArguments().getStringArrayList("data");
+
+        // method to pass data to the RecyclerView
         updateRecyclerView(data);
 
-
+        // Displays the symbol the user requested or an error message
         String displayMessage = getArguments().getString("DisplayMessage");
         TextView textView = rootView.findViewById(R.id.stockDisplayText);
 
@@ -95,13 +97,6 @@ public class StockDataDisplayFragment extends Fragment  {
             textView.setText("Showing data for " + displayMessage);
 
         return rootView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

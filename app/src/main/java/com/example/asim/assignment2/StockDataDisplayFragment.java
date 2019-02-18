@@ -92,7 +92,7 @@ public class StockDataDisplayFragment extends Fragment  {
         TextView textView = rootView.findViewById(R.id.stockDisplayText);
 
         if(displayMessage.startsWith("error"))
-            textView.setText(displayMessage);
+            textView.setText(displayMessage + " press the back button \n and enter a new symbol");
         else
             textView.setText("Showing data for " + displayMessage);
 

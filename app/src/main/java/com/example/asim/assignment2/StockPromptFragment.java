@@ -8,7 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
+/**
+ * Asim Anis
+ * Assignment 2 CS4301.002
+ * Professor John Cole
+ * 2/19/2019
+ * This program takes in a ticker symbol from the user and retrieves the stock data for this symbol
+ * from a website and reads in this information to display it to the user. The processing of the data is done on
+ * a asynchronously. There are 2 fragments one to display the prompt for the user and the other to display
+ * the stock data. The user can switch between these fragments using the Display and Back Buttons.
+ */
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,13 +30,7 @@ import android.widget.ProgressBar;
 public class StockPromptFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     ProgressBar progressBar;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -39,16 +42,12 @@ public class StockPromptFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment StockPromptFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static StockPromptFragment newInstance(String param1, String param2) {
         StockPromptFragment fragment = new StockPromptFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,10 +55,6 @@ public class StockPromptFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -67,17 +62,13 @@ public class StockPromptFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_stock_prompt, container, false);
+
+        // Set the progress bar
         progressBar = rootView.findViewById(R.id.progressBar);
+        // Turn the working indicator off
         setProgressBarOff();
 
         return rootView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -112,6 +103,9 @@ public class StockPromptFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * This method hides to working indicator.
+     */
     public void setProgressBarOff(){
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -121,6 +115,9 @@ public class StockPromptFragment extends Fragment {
         });
     }
 
+    /**
+     * This method makes the working indicator visible.
+     */
     public void setProgressBarOn(){
         getActivity().runOnUiThread(new Runnable() {
             @Override

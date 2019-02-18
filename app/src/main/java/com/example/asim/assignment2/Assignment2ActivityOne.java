@@ -1,4 +1,14 @@
 package com.example.asim.assignment2;
+/**
+ * Asim Anis
+ * Assignment 2 CS4301.002
+ * Professor John Cole
+ * 2/19/2019
+ * This program takes in a ticker symbol from the user and retrieves the stock data for this symbol
+ * from a website and reads in this information to display it to the user. The processing of the data is done on
+ * a asynchronously. There are 2 fragments one to display the prompt for the user and the other to display
+ * the stock data. The user can switch between these fragments using the Display and Back Buttons.
+ */
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -130,6 +140,7 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
                     }
                     responseInputStream.close();
                     scanner.close();
+                    connection.disconnect();
                 }else{
                     Log.i(TAG, "error "  + connection.getResponseCode());
                     displayMessage = "error "  + connection.getResponseCode();
@@ -163,6 +174,7 @@ public class Assignment2ActivityOne extends AppCompatActivity implements StockDa
             if(result.size() > 0)
                 result.remove(0);
 
+            Log.i(TAG, result.size() + "");
             Bundle bundle = new Bundle();
             bundle.putStringArrayList("data", result);
             bundle.putString("DisplayMessage", displayMessage);

@@ -16,7 +16,7 @@
         android:text=""
         android:textSize="@dimen/edit_text_size" />
 
-    <View style="@style/Divider"
+    <View style="@style/Horizantal_Divider"
         app:layout_constraintBottom_toBottomOf="@+id/stockDisplayText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
